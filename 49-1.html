@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令replace属性详解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <hd-cms></hd-cms>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.directive('hdCms',[function(){
+        return {
+            restrict:'AE',
+            template:"<h1>后断网</h1>",
+            replace:true  //为true的时候 整个替换  为flase的时候 放在标签里面
+        }
+    }]);
+</script>
+</body>
+</html>

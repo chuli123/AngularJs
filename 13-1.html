@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数使用对象扩充与数据遍历</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<div ng-controller="hd"></div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        var obj = {name:'后盾人',url:'houdunwang.com'};
+        angular.extend(obj,{web:'后盾网',a:'houdunren.com'});
+        //输出结果 Object {name: "后盾人", url: "houdunwang.com", web: "后盾网", a: "houdunren.com"}  为对象里面添加不同的键值
+        console.log(obj);
+        $scope.data = [{name:'后盾人',url:'houdunwang.com'},{name:'后盾网',url:'houdunren.com'}];
+        angular.forEach($scope.data,function(v,k){
+            console.log(k);//输出的是 0 1
+            console.log(v);//输出的是 Object {name: "后盾人", url: "houdunwang.com"} Object {name: "后盾网", url: "houdunren.com"}
+        });
+    }]);
+</script>
+</body>
+</html>

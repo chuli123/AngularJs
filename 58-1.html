@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令directive的link属性详解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<hd-cms bgcolor="red" title="hdcms" fontcolor="green"></hd-cms>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.directive('hdCms',[function(){
+        return {
+            restrict:'E',
+            scope:{
+                title:'@'
+            },
+            link:function(scope,elem,attr){
+                $(elem).css({backgroundColor:attr['bgcolor'],color:attr['fontcolor']}).html(scope.title);
+            }
+//            操作DOM用link
+        }
+    }]);
+</script>
+</body>
+</html>

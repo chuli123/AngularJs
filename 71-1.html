@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多个控制器共享服务server数据的处理实例</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <table>
+            <tr ng-repeat="v in data">
+                <td>{{v.name}}</td>
+                <td>{{v.url}}</td>
+            </tr>
+        </table>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.factory('listService',['$http',function($http){
+        var obj = {
+            all:function(){
+                return $http({url:'71-1.php'}).then(function(respond){
+                    return respond.data;
+                });
+            },
+            find:function(id){
+                return this.all().then(function(data){
+                    for(i=0;i<data.length;i++){
+                        if (data[i].id =id){
+                            return data[i];
+                        }
+                    }
+                });
+            }
+        }
+        return obj;
+    }]);
+    app.controller('hd',['$scope','listService',function($scope,listService){
+        listService.all().then(function(data){
+            $scope.data = data;
+        });
+        listService.find(1).then(function(data){
+            console.log(data);
+        });
+    }]);
+</script>
+</body>
+</html>

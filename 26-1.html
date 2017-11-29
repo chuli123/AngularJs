@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS 弹性盒模型+bootStrap 开发微信菜单前端之根据微..</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="org/bootstrap.css" type="text/css">
+    <style>
+        .mobile{
+            border: 1px solid #f9f9f9;
+            height:500px;
+            display: flex;
+        }
+        .mobile dl{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex: 1;
+            flex-direction: column-reverse;
+        }
+        .mobile dl dt{
+            background-color: #999999;
+            color: #ffffff;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+            line-height: 2em;
+        }
+        .mobile dl dd{
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile dl dd a{
+            border: 1px solid #f3f3f3;
+            text-align: center;
+            padding: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body ng-app="app">
+<div ng-controller="hd">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 app">
+                <div class="mobile">
+                    <dl ng-repeat="v in data.button">
+                        <dt ng-bind="v.name"></dt>
+                        <dd ng-repeat="d in v.sub_button">
+                            <a href="" ng-bind="v.name"></a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="panel panel-default">
+                    <div class="page-header">
+                        <div class="panel-title">编辑</div>
+                    </div>
+                    <!--一级菜单开始-->
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body" ng-repeat="v in data.button">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="v.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">链接</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="v.url">
+                                    </div>
+                                </div>
+                                <!--二级菜单开始-->
+                                <div class="panel panel-default" ng-repeat="d in v.sub_button">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">标题</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="d.name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">链接</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="d.url">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--二级菜单结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--一级菜单结束-->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.data = {
+            "button": [
+                {
+                    "type": "click",
+                    "name": "今日歌曲",
+                    "key": "V1001_TODAY_MUSIC",
+                    "sub_button": [ ]
+                },
+                {
+                    "type": "click",
+                    "name": "歌手简介",
+                    "key": "V1001_TODAY_SINGER",
+                    "sub_button": [ ]
+                },
+                {
+                    "name": "菜单",
+                    "sub_button": [
+                        {
+                            "type": "view",
+                            "name": "搜索",
+                            "url": "http://www.soso.com/",
+                            "sub_button": [ ]
+                        },
+                        {
+                            "type": "view",
+                            "name": "视频",
+                            "url": "http://v.qq.com/",
+                            "sub_button": [ ]
+                        },
+                        {
+                            "type": "click",
+                            "name": "赞一下我们",
+                            "key": "V1001_GOOD",
+                            "sub_button": [ ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }]);
+</script>
+</body>
+</html>

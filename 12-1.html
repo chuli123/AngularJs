@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数使用方法大小转换与对象深拷贝</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<div ng-controller="hd"></div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        console.log(angular.version);//查看angular版本
+        console.log(angular.lowercase('houDUNWANG'));//转换成小写
+        console.log(angular.uppercase('houdunwang'));//转换成大写
+        var obj = {name:'houdunwang'};
+        var obj2 = obj;//传址 当obj2的数据改变，obj的也会改变
+        var obj2 = {};
+        angular.copy(obj,obj2);//数据深拷贝 obj2的数据改变不会影响obj的
+        obj2.name = 'houdunren';
+        console.log(obj);
+    }]);
+</script>
+</body>
+</html>

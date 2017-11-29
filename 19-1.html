@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-selected、ng-disabled、ng-readonly实例讲解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        sex:<select ng-model="user.sex">
+                <option></option>
+                <option ng-value="1" ng-selected="user.sex==1">man</option>
+                <option ng-value="2" ng-selected="user.sex==2">woman</option>
+            </select>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.user = {sex:1};
+    }]);
+</script>
+</body>
+</html>

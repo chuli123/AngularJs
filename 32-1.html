@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS 弹性盒模型+bootStrap 开发微信菜单前端之根据微..</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="org/underscore.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="org/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="org/font-awesome.min.css" type="text/css">
+    <style>
+        .mobile{
+            border: 1px solid #f9f9f9;
+            height:500px;
+            display: flex;
+        }
+        .mobile dl{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex: 1;
+            flex-direction: column-reverse;
+        }
+        .mobile dl dt{
+            background-color: #999999;
+            color: #ffffff;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+            line-height: 2em;
+        }
+        .mobile dl dd{
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile dl dd a{
+            border: 1px solid #f3f3f3;
+            text-align: center;
+            padding: 6px;
+            text-decoration: none;
+        }
+        .top-menu,.sub-menu{
+            position: relative;
+        }
+        .top-menu .top-fa,.sub-menu .sub-fa{
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            display: none;
+            cursor: pointer;
+        }
+        .top-menu:hover .top-fa,.sub-menu:hover .sub-fa{
+            display: block;
+        }
+    </style>
+</head>
+<body ng-app="app">
+<div ng-controller="hd">
+    <form action="" method="post" class="form-horizontal" role="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 app">
+                    <div class="mobile">
+                        <dl ng-repeat="v in data.button">
+                            <dt ng-bind="v.name"></dt>
+                            <dd ng-repeat="d in v.sub_button">
+                                <a href="" ng-bind="v.name"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">编辑</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--一级菜单s-->
+                            <div class="panel panel-default top-menu" ng-repeat="v in data.button">
+                                <i class="fa fa-times-circle top-fa" ng-click="delTop(v)"></i>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">标题</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-hide="v.sub_button.length>0">
+                                        <label class="col-sm-2 control-label">类型</label>
+                                        <div class="col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="v.type" value="click"> 关键词
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="v.type" value="view"> 网址
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="v.type=='click' && v.sub_button.length==0">
+                                        <label class="col-sm-2 control-label">关键词</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.key">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"  ng-if="v.type=='view' && v.sub_button.length==0">
+                                        <label class="col-sm-2 control-label">链接</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.url">
+                                        </div>
+                                    </div>
+                                    <!--二级菜单s-->
+                                    <div class="panel panel-default sub-menu" ng-repeat="d in v.sub_button">
+                                        <i class="fa fa-times-circle sub-fa" ng-click="delSub(v,d)"></i>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">类型</label>
+                                                <div class="col-sm-10">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" ng-model="d.type" value="click"> 关键词
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" ng-model="d.type" value="view"> 网址
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="d.type=='click'">
+                                                <label class="col-sm-2 control-label">关键词</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.key">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"  ng-if="d.type=='view'">
+                                                <label class="col-sm-2 control-label">链接</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.url">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--二级菜单e-->
+                                    <button type="button" ng-click="addSubButton(v)" class="btn btn-info">添加菜单</button>
+                                </div>
+                            </div>
+                            <!--一级菜单结束-->
+                            <button type="button" ng-click="addTopButton()" class="btn btn-success">添加一级菜单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.data = {
+            "button": [
+                {
+                    "type": "click",
+                    "name": "今日歌曲",
+                    "key": "V1001_TODAY_MUSIC",
+                    "sub_button": []
+                },
+                {
+                    "type": "view",
+                    "name": "后盾人",
+                    "url": "http://www.houdunren.com",
+                    "sub_button": [
+                        {
+                            "type": "view",
+                            "name": "PHP",
+                            "url": "http://www.houdunren.com/"
+                        },
+                        {
+                            "type": "view",
+                            "name": "HTML5",
+                            "url": "http://www.houdunren.com/"
+                        }
+                    ]
+                }
+            ]
+        };
+        $scope.addTopButton = function(){
+            var menu = {
+                "type": "click",
+                "name": "今日歌曲",
+                "key": "V1001_TODAY_MUSIC"
+            };
+            if($scope.data.button.length >= 3){
+                alert("not more than three");
+            }else {
+                $scope.data.button.push(menu);
+            }
+        };
+        $scope.addSubButton = function(item){
+            var menu = {
+                "type": "view",
+                "name": "PHP",
+                "url": "http://www.houdunren.com/"
+            };
+            if(!item.sub_button){
+                item.sub_button = [];
+            }
+            if(item.sub_button.length >= 5){
+                alert("not more than five");
+            }else {
+                item.sub_button.push(menu);
+            }
+        };
+
+        $scope.delTop = function(item){
+            $scope.data.button = _.without($scope.data.button,item);
+        };
+
+        $scope.delSub = function(topMenu,subMenu){
+            topMenu.sub_button = _.without(topMenu.sub_button,subMenu);
+        }
+
+    }]);
+</script>
+</body>
+</html>

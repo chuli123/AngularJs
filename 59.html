@@ -1,0 +1,13 @@
+<style>
+    .hd-tab a{display: inline-block;padding:6px 10px;border:1px solid #aaa;text-decoration: none;}
+    .hd-tab a.active{background: #aaaaaa;color:#fff;}
+    .hd-tab div.list{border:1px solid #aaa;padding: 20px;width: 300px;height: 200px;margin-top: -2px;}
+</style>
+<div class="hd-tab">
+    <a href="" ng-class="{active:$first}" ng-repeat="v in data">{{v.title}}</a>
+    <div class="list" ng-repeat="v in data" ng-style="{display:$first?'block':'none'}">
+        <ul>
+            <li ng-repeat="n in v.data">{{n.title}}</li>
+        </ul>
+    </div>
+</div>

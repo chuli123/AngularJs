@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>controller控制器scope父子集作用域实例讲解一</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        {{data.name}}
+        <!--继承但隔离  即父级控制器能改变子级 子级之只能通过对象改变父级  前提是子级没定义name-->
+        <div ng-controller="hd1">
+            <!--当子控制器不定义name时，继承父级的-->
+            {{data.name}}
+            <!--当数据类型为对象时，子级控制器能改变父级控制器中的数据-->
+            <input type="text" ng-model="data.name">
+        </div>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.data = {name:'houdunren'};
+    }]);
+    app.controller('hd1',['$scope',function($scope){
+//        $scope.name = 'houdunwang';
+    }]);
+</script>
+</body>
+</html>

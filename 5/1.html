@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$scope的基本用法</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="hd">
+        <p>商品名称：{{goods.name}}</p>
+        <p>商品价格：{{goods.price}}</p>
+        <p>购买数量：{{goods.num}}</p>
+        <p>总价：{{goods.price*goods.num}}</p>
+        <p><button ng-click="add()">增加</button><button ng-click="reduce()">减少</button></p>
+    </div>
+<script type="text/javascript">
+   var app = angular.module("hd",[]);
+    app.controller("hd",['$scope',function($scope){
+        $scope.goods = {'name':'HUAWEI','price':1000,'num':0},
+        $scope.add = function(){
+           $scope.goods.num = Math.min(++$scope.goods.num,6);
+        },
+        $scope.reduce = function(){
+            $scope.goods.num = Math.max(--$scope.goods.num,0);
+        }
+    }]);
+</script>
+</body>
+</html>

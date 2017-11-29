@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用ng-if、ng-show、ng-disabled、ng-init实现网站注册协议设置</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<div ng-controller="hd">
+    <!--<input type="checkbox" ng-model="status">-->
+    <!--<div ng-if="status">show</div>-->
+    <label><input type="checkbox" ng-model="status">接受协议</label>
+    <span><button ng-init="copyright=false" ng-click="copyright=!copyright">查看</button></span>
+    <textarea ng-if="copyright">show</textarea>
+    <button ng-disabled="!status">登录</button>
+</div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+
+    }]);
+</script>
+</body>
+</html>

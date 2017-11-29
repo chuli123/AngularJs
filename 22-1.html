@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过ng-class动态改变样式类实例操作</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <style>
+        .red{background-color: red;}
+        .font{font-size: 20rem;}
+    </style>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <!--当样式为true时引用 false则不引用-->
+        <div ng-class="{red:true,font:true}">hdPhp</div>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$timeout与$interval实际使用场景分析与实例讲解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        {{name}}
+        <hr>
+        {{id}}
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope','$timeout','$interval',function($scope,$timeout,$interval){
+        $scope.name = '后盾人';
+        $scope.id = 0;
+        var timeId = $timeout(function(){
+            $scope.name = 'houdunwang';
+        },2000);
+        $timeout.cancel(timeId);
+        var intervalId = $interval(function(){
+            $scope.id++;
+            if($scope.id > 10){
+                $interval.cancel(intervalId);
+            }
+        },1000);
+    }]);
+</script>
+</body>
+</html>

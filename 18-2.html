@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-repeat实例详细讲解与后盾人网站进行分析</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <ul>
+            <!--当数组里面有相同数据时会报错，用track by指定唯一性的数据-->
+            <li ng-repeat="v in data track by $index">
+                {{v}}
+            </li>
+        </ul>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.data = ['houdunren','houdunwang','hdphp','hdphp'];
+    }]);
+</script>
+</body>
+</html>

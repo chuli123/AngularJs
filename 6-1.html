@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表达式与ng-bind及ng-cloak解决闪屏问题</title>
+    <style>
+        .ng-cloak{
+            display: none;
+        }
+    </style>
+</head>
+<!--当网速慢的时候，用ng-cloak就不会看到闪屏-->
+<body ng-app="hd" ng-cloak class="ng-cloak">
+    <div ng-controller="hd">
+        {{name}}
+        <hr>
+        {{data.username+"=>"+data.url}}
+        <hr>
+        {{num*3}}
+        <hr>
+        <h3 ng-bind="name">541555</h3>
+        5456646
+    </div>
+<script src="/angular/angular.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var app = angular.module('hd',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = "后盾网";
+        $scope.data = {
+            'username':'后盾人',
+            'url':'houdunren.com'
+        };
+        $scope.num = 9;
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-init与ng-trim及表单中表单value与$scope数据提交差异分析</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<!--ng-init 定义初始化值-->
+<div ng-controller="hd" ng-init="name='houdunren'">
+   {{name}}
+   <form method="post" action="16-1.php">
+       <!--当使用ng-model时 就直接使用了ng-trim  ng-trim 默认是true 当type为password时 ng-trim则为false-->
+       标题:<input type="text" ng-model="title" name="title"><br>
+       <input type="text" name="data">
+       <input type="submit">
+   </form>
+</div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.title='';
+        $('form').submit(function(){
+            $("[name='data']").val($scope.title);
+        });
+    }]);
+</script>
+</body>
+</html>

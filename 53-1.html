@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令scope作用域分析一</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        {{name}}
+        <hr>
+        <hdcms></hdcms>
+    </div>
+
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.directive('hdcms',[function(){
+        return {
+            restrict: 'AEC',
+            template: '{{name}}',
+            scope: false
+//            scope 为false时继承父级的 为true时 子级改变 父级不变 为{}时 不继承父级
+        }
+    }]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = 'houdunwang';
+    }]);
+</script>
+</body>
+</html>

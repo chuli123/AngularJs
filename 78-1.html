@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uiRouter路由控制器或指令中执行路由跳转</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/angular/angular-ui-router.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<a ui-sref="home">home</a>
+<a ui-sref="list">list</a>
+<ui-view></ui-view>
+<script type="text/javascript">
+    var app = angular.module('app',['ui.router']);
+    app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+        $urlRouterProvider.otherwise('/home');
+        $stateProvider.state('home',{
+                    url:'/home',
+                    templateUrl:'view/76.html',
+                    controller:'hd'
+                })
+                .state('list',{
+                    url:'/list',
+                    template:'<h1>list</h1>',
+                })
+    }]);
+    app.controller('hd',['$scope','$state',function($scope,$state){
+        $scope.go = function(url){
+            $state.go(url);
+        }
+    }]);
+</script>
+</body>
+</html>

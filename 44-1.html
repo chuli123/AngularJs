@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器之手机加星过滤器实例</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <table>
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td>mobile</td>
+            </tr>
+            <tr ng-repeat="v in data">
+                <td>{{v.id}}</td>
+                <td>{{v.name}}</td>
+                <td>{{v.mobile|truncate}}</td>
+            </tr>
+        </table>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.filter('truncate',function(){
+        return function (mobile,len){
+            len = len ? len : 3;
+            return mobile.substr(0,11-len)+new String('*').repeat(len);
+        }
+    });
+    app.controller('hd',['$scope',function($scope){
+        $scope.data=[
+            {id:1,name:100,mobile:'13548752115'},
+            {id:2,name:200,mobile:'15436787523'},
+            {id:3,name:300,mobile:'13548726547'},
+        ];
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uiRouter路由参数设置与$stateParams服务的使用</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/angular/angular-ui-router.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ui-view></div>
+<script>
+    var app = angular.module('app',['ui.router']);
+    app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+        $urlRouterProvider.otherwise('/home');
+        $stateProvider.state('home',{
+            url:'/home',
+            templateUrl:'view/79.html',
+            controller:'ctrl'
+        })
+        .state('user',{
+            url:'/user/{id}',
+            template:'<h1>用户名：{{name}}</h1>',
+            controller:'ctrl'
+        })
+    }]);
+    app.controller('ctrl',['$scope','$stateParams',function($scope,$stateParams){
+        $scope.user = [
+            {id:1,name:'xiangjun'},
+            {id:2,name:'guli'}
+        ];
+        var id = $stateParams.id;
+        if(id){
+            for(var i=0;i<$scope.user.length;i++){
+                if(id == $scope.user[i].id){
+                    $scope.name = $scope.user[i].name;
+                }
+            }
+        }
+    }]);
+</script>
+</body>
+</html>

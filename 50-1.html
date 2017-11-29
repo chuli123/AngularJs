@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令transclude与templateUrl属性详解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <hd-cms>houdunren</hd-cms>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.directive('hdCms',[function(){
+        return {
+            restrict:'AE',
+            template:"<div ng-transclude=''></div></div><h1>houdunwang</h1>",
+            transclude:true  //为true的时候不会替换标签里面的内容
+        }
+    }]);
+</script>
+</body>
+</html>

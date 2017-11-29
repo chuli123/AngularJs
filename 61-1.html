@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用$scope.$apply进行数据脏检查</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        {{name}}
+        <button ng-click="callback()">event</button>
+        <hr>
+        <button id="bt">event</button>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = "houdunren";
+        $scope.callback = function(){
+            $scope.name = "houdunren.com";
+        }
+        $('#bt').click(function(){
+            $scope.name = "houdunwang";
+            $scope.$apply();
+        });
+    }]);
+</script>
+</body>
+</html>

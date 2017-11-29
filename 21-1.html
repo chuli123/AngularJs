@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-model-options设置数据同步时机提交网站性能</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <!--设置更新时间 debounce:{default:3000,blur:0}  设置鼠标移开就更新 updateOn:'default blur' -->
+        <input type="text" ng-model="title" ng-model-options="{updateOn:'default blur',debounce:{default:3000,blur:0}}">
+        {{title}}
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+
+    }]);
+</script>
+</body>
+</html>

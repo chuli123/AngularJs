@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>callee与过滤器</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <table>
+            <tr>
+                <td ng-click="orderBy('id')">id</td>
+                <td ng-click="orderBy('click')">点击数</td>
+                <td ng-click="orderBy('title')">标题</td>
+            </tr>
+            <tr ng-repeat="v in data">
+                <td>{{v.id}}</td>
+                <td>{{v.click}}</td>
+                <td>{{v.title}}</td>
+            </tr>
+        </table>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope','$filter',function($scope,$filter){
+        $scope.data=[
+            {id:1,click:100,title:'后盾人'},
+            {id:2,click:200,title:'PHP'},
+            {id:3,click:300,title:'后盾网'},
+        ];
+        $scope.orderBy = function(filed){
+            if(arguments.callee[filed] ==undefined ){
+                arguments.callee[filed] = false;
+            }
+            arguments.callee[filed] = !arguments.callee[filed];
+            $scope.data = $filter('orderBy')($scope.data,filed,arguments.callee[filed]);
+        }
+    }]);
+</script>
+</body>
+</html>

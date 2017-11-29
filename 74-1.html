@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uiRouter默认路由规则操作</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/angular/angular-route.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<ul>
+    <li>
+        <a href="#hd">红色方块视图</a>
+    </li>
+    <li>
+        <a href="#blue">蓝色方块视图</a>
+    </li>
+</ul>
+<div ng-view></div>
+<script type="text/javascript">
+    var app = angular.module('app',['ngRoute']);
+    app.config(['$locationProvider','$routeProvider',function($locationProvider,$routeProvider){
+        $locationProvider.hashPrefix('');
+        $routeProvider.when('/hd',{
+            template:'<h1>houdunwang</h1>'
+        })
+        .when('/blue',{
+            template:'<h1>houdunren</h1>'
+        })
+        .otherwise({
+            redirectTo:'/hd'
+        });
+    }]);
+</script>
+</body>
+</html>

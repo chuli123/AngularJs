@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-model在表单中双向绑定实例讲解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="hd">
+        <input type="text" ng-model="name">
+        {{name}}
+    </div>
+<script type="text/javascript">
+    var app = angular.module('hd',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = "houdunwang.com";
+    }]);
+</script>
+</body>
+</html>

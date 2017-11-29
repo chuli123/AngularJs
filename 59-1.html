@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab面板组件的指令实现</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <hd-tab data="data"></hd-tab>
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.data = [
+            {
+                id:1,title:'培训',data:[
+                {id:1,title:'PHP'},
+                {id:2,title:'HTML5'}
+            ]},
+            {
+                id:2,title:'开源框架',data:[
+                {id:1,title:'HDCMS'},
+                {id:2,title:'HDPHP'}
+            ]}
+        ]
+    }]);
+    app.directive('hdTab',[function(){
+        return{
+            restrict:'E',
+            templateUrl:'59.html',
+            scope:{data:'=data'},
+            link:function(scope,elem,attr){
+                $(elem).delegate('a','click',function(){
+                    $('a').removeClass('active');
+                    $(this).addClass('active');
+                    var index = $(this).index();
+                    $(elem).find('div.list').hide();
+                    $(elem).find('div.list').eq(index-1).show();
+                });
+            }
+        }
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uiRouter路由控制器使用方式详解</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/angular/angular-route.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+<a href="#home">home</a>
+<a href="#list">list</a>
+<div ng-view></div>
+<script type="text/javascript">
+    var app = angular.module('app',['ngRoute']);
+    app.config(['$locationProvider','$routeProvider',function($locationProvider,$routeProvider){
+        $locationProvider.hashPrefix('');
+        $routeProvider.when('/home',{
+                    templateUrl:'view/77.html',
+                    controller:'hd'
+                })
+                .when('/list',{
+                    template:'<h1>list</h1>'
+                })
+                .otherwise({
+                    redirectTo:'/home'
+                })
+    }]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = "houdunwang";
+    }]);
+</script>
+</body>
+</html>

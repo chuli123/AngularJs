@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hd">
+<head>
+    <meta charset="UTF-8">
+    <title>声明模块与控制器规范与依赖注入分析</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-controller="hd">
+{{name}}
+<script type="text/javascript">
+    var app = angular.module('hd',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.name = "后盾网";
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例讲解angular操作select列表框</title>
+    <script src="/angular/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="hd">
+        <select ng-model="city" ng-options="v.value as v.name for v in data"></select>
+        {{city}}
+    </div>
+<script type="text/javascript">
+    var app = angular.module('app',[]);
+    app.controller('hd',['$scope',function($scope){
+        $scope.city = "gz";//只可以填value值，否则找不到相对应的
+        $scope.data = [
+            {name:'广州',value:'gz'},
+            {name:'上海',value:'sh'},
+            {name:'深圳',value:'sz'},
+        ];
+    }]);
+</script>
+</body>
+</html>
